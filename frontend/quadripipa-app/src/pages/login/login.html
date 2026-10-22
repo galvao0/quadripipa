@@ -1,0 +1,61 @@
+<div class="content">
+  <div class="logo">
+    <img
+      src="https://www.quadripipa.com.br/assets/logo-Cynmk3UE.webp"
+      alt="Quadripipa"
+      width="100"
+      height="100"
+    />
+  </div>
+
+  <div class="body">
+    <div class="header">
+      <h1>Bem-vindo de volta</h1>
+      <p>Entre na sua conta para continuar.</p>
+    </div>
+
+    <form>
+      <div class="div-input">
+        <p><label for="email">E-mail</label></p>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="seu@email.com"
+          autocomplete="email"
+          required
+          [(ngModel)]="email"
+        />
+      </div>
+
+      <div class="div-input">
+        <p><label for="password">Senha</label></p>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Digite sua senha"
+          autocomplete="current-password"
+          required
+          [(ngModel)]="password"
+        />
+        <p class="p-forgot-pass">Esqueceu sua senha?</p>
+      </div>
+
+      <div class="div-btn" (click)="auth()">
+        <div *ngIf="hideError" class="div-error">
+          <svg lucideCircleX></svg>
+          <p>{{ error }}</p>
+        </div>
+        <button class="btn-primary" type="submit">
+          Entrar na conta
+          <svg lucideMoveRight></svg>
+        </button>
+
+        <button (click)="navigate('/signup')" class="btn-secundary" type="button">
+          Criar conta
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">QuadriPipa</string>
+    <string name="title_activity_main">QuadriPipa</string>
+    <string name="package_name">com.axoraen.quadripipa</string>
+    <string name="custom_url_scheme">com.axoraen.quadripipa</string>
+</resources>
