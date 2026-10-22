@@ -1,3 +1,74 @@
 @if (user$ | async; as user) {
-  <p>{{ user.name }}</p>
+  <div class="content">
+    <header class="header">
+      <div class="user-cont">
+        <div class="ic-user">
+          <svg lucideUser></svg>
+        </div>
+        <p class="user-name">{{user.name}}</p>
+      </div>
+      <button class="btn-menu" (click)="setMenu()">
+        <svg lucideMenu></svg>
+      </button>
+    </header>
+    <div class="section">
+      <div class="header">Seleções rápidas</div>
+      <div class="items">
+        <div class="item selected">
+          <p>Todos</p>
+        </div>
+        <div class="item">
+          <p>Reservas</p>
+        </div>
+        <div class="item">
+          <p>Passeios</p>
+        </div>
+        <div class="item">
+          <p>Veículos</p>
+        </div>
+      </div>
+    </div>
+    <div class="body">
+      <button class="btn-primary btn">
+        <svg lucidePlus></svg>
+      </button>
+    </div>
+    @if (menuStatus) {
+      <div class="menu">
+        <div class="header">
+          <img
+            src="https://www.quadripipa.com.br/assets/logo-Cynmk3UE.webp"
+            alt="Quadripipa"
+            width="50"
+            height="50"
+          />
+          <button class="btn-menu" (click)="setMenu()">
+            <svg lucideChevronLeft></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="header"></div>
+          <div class="items">
+            <div *ngFor="let r of routes" class="item">
+              <svg {r.icon} ></svg>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="user-cont">
+            <div class="ic-user">
+              <svg lucideUser></svg>
+            </div>
+            <div class="user">
+              <p class="user-name">{{user.name}}</p>
+              <span class="user-type">{{user.type}}</span>
+            </div>
+          </div>
+          <button class="btn-logout">
+            <svg lucideLogOut></svg>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
 }

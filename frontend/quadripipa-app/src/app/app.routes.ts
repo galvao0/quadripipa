@@ -23,4 +23,9 @@ export const routes: Routes = [
     path: 'verify-email',
     component: VerifyEmail,
   },
+  {
+    path: 'create-ve',
+    loadComponent: () => import('../pages/create-ve/create-ve').then((m) => m.CreateVe),
+    canActivate: [authGuard]
+  }
 ];

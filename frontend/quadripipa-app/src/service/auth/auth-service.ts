@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 })
 export class AuthService {
   private http: HttpClient = inject(HttpClient);
-  private url: string = 'http://192.168.0.7:3000/auth/';
+  private url: string = 'http://localhost:3000/auth/';
 
   private userSubject = new BehaviorSubject<ResponseUserDto | null>(null);
   user$ = this.userSubject.asObservable();
