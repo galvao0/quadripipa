@@ -1,14 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AuthDto } from './dto/auth.dto';
-import { ResponseDto } from '../response.dto';
 import { ResponseUserDto } from '../signup/dto/response-user.dto';
-import { Observable } from 'rxjs';
-
-export interface Resp {
-  data: ResponseUserDto;
-  access_token: string;
-}
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +11,18 @@ export class AuthService {
   private http: HttpClient = inject(HttpClient);
   private url: string = 'http://192.168.0.7:3000/auth/';
 
-  user!: ResponseUserDto;
-  l!: Error;
+  private userSubject = new BehaviorSubject<ResponseUserDto | null>(null);
+  user$ = this.userSubject.asObservable();
 
-  auth(dto: AuthDto): Observable<Resp> {
-    return this.http.post<Resp>(this.url, dto, { withCredentials: true });
+  auth(dto: AuthDto): Observable<string> {
+    return this.http.post(this.url, dto, { withCredentials: true, responseType: 'text' });
+  }
+
+  me(): Observable<ResponseUserDto> {
+    return this.http.get<ResponseUserDto>(`${this.url}me`, { withCredentials: true }).pipe(
+      tap((user) => {
+        this.userSubject.next(user);
+      }),
+    );
   }
 }

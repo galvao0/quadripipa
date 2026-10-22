@@ -1,21 +1,23 @@
 import { Routes } from '@angular/router';
-import { Login } from '../pages/login/login';
-import { Home } from '../pages/home/home';
-import { Signup } from '../pages/signup/signup';
 import { VerifyEmail } from '../pages/verify-email/verify-email';
+import { authGuard } from '../service/auth/auth-guard';
+import { guestGuard } from '../service/auth/guest-guard';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Login,
+    loadComponent: () => import('../pages/login/login').then((m) => m.Login),
+    canActivate: [guestGuard],
   },
   {
     path: 'home',
-    component: Home,
+    loadComponent: () => import('../pages/home/home').then((m) => m.Home),
+    canActivate: [authGuard],
   },
   {
     path: 'signup',
-    component: Signup,
+    loadComponent: () => import('../pages/signup/signup').then((m) => m.Signup),
+    canActivate: [guestGuard],
   },
   {
     path: 'verify-email',

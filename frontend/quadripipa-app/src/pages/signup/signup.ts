@@ -28,6 +28,9 @@ export class Signup {
       .subscribe({
         next: (res) => this.navigate('/'),
         error: (err) => {
+          console.log('ERRO COMPLETO:', err);
+          console.log('STATUS:', err.status);
+          console.log('BODY:', err.error);
           if (Array.isArray(err.error.message)) {
             this.error = err.error.message[0];
           } else {

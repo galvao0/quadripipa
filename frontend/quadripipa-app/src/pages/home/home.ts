@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../service/auth/auth-service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   templateUrl: './home.html',
   styleUrl: './home.scss',
   selector: 'app-home',
-  imports: [],
+  imports: [AsyncPipe],
 })
 export class Home {
-  constructor(private readonly authService: AuthService) {}
-  l!: string | undefined;
+  private authService = inject(AuthService);
+  user$ = this.authService.user$;
   ngOnInit() {
-    this.l = this.authService.user?.email;
+    console.log(this.user$);
   }
 }

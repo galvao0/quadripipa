@@ -23,8 +23,8 @@ export class Login {
 
   auth() {
     this.authService.auth({ email: this.email, password: this.password }).subscribe({
-      next: (res) => {
-        ((this.authService.user = res.data), this.router.navigate(['/home']), console.log(res));
+      next: () => {
+        this.navigate('/home');
       },
       error: (err) => {
         if (Array.isArray(err.error.message)) {
@@ -51,5 +51,7 @@ export class Login {
     this.router.navigate([url]);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.me().subscribe();
+  }
 }
